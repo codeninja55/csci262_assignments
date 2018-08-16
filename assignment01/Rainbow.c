@@ -82,9 +82,9 @@ unsigned char *md5_hash(unsigned char * str)
     MD5_Update(&md5_ctx, str, strlen(str));
     MD5_Final(md5_digest, &md5_ctx);
 
-    printf("MD5 Digest: ");
-    for (int i=0; i < MD5_DIGEST_LENGTH; i++) printf("%02x ",  md5_digest[i]);
-    printf("\n");
+    // printf("MD5 Digest: ");
+    // for (int i=0; i < MD5_DIGEST_LENGTH; i++) printf("%02x ",  md5_digest[i]);
+    // printf("\n");
 
     return md5_digest;
 }
@@ -98,8 +98,6 @@ void generate_rainbow(char * word)
 
 // A function to return the current time
 /* Title: localtime reference
- * Author(s):
- * Date:
  * Availability: http://www.cplusplus.com/reference/ctime/localtime/
  * */
 char* get_current_time()
@@ -110,6 +108,12 @@ char* get_current_time()
     timeinfo = localtime(&rawtime);
     return asctime(timeinfo);
 }
+
+/* The functions below are referenced to:
+ * Title: Hacking, 2nd edition
+ * Author(s): Jon Erickson
+ * Date: 2008
+ * */
 
 // A function to display an error message and then exit
 void fatal(char *message)
