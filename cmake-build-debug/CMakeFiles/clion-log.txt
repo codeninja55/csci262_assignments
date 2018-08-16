@@ -1,4 +1,11 @@
-/home/codeninja/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/182.3684.76/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -lssl -lcrypto -Wall -G "CodeBlocks - Unix Makefiles" /home/codeninja/Dropbox/uow_csci262/csci262_assignments
+/usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments
+-- The C compiler identification is GNU 6.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug
+-- Build files have been written to: /mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug

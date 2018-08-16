@@ -12,25 +12,28 @@
 #include <time.h>
 #include "md5.h"
 
+#define PASSWORD_LEN 30
 #define MD5_DIGEST_LENGTH 16
 #define USED 1
 #define NOT_USED 0
 
-/* ########## TYPEDEF ########## */
-// typedef struct Hash Hash;
-
 /* ########## STRUCT DEF ########## */
-typedef struct Hash {
-  unsigned char* md5_digest;
+typedef struct PasswordRecord {
+  char str_passwd[PASSWORD_LEN];
+  unsigned char* hashed_digest;
   int used;
-} Hash;
+} PasswordRecord;
+
+/* ########## GLOBAL VARS ########## */
+PasswordRecord RAINBOW_TABLE[1000000];
 
 /* ########## FUNCTION PROTOTYPES ########## */
 void *ec_malloc(unsigned int size);
 void fatal(char *message);
 char* get_current_time();
 unsigned char *md5_hash(unsigned char*);
-
+void reduction();
+void make_rainbow_value();
 
 int main( int argc, const char* argv[] )
 {
@@ -42,26 +45,36 @@ int main( int argc, const char* argv[] )
     }
 
     FILE *fd;
-    char word[60];
-    unsigned char *current_hash;
-    int count = 0;
+    char str_passwd[PASSWORD_LEN];
+    int i, count;
+    i = count = 0;
 
     if ( (fd = fopen(buffer, "r")) == NULL )  {
         fprintf(stderr, "[DEBUG]: Failed to open file [ %s ]\n", strerror(1));
         exit(1);
     }
 
-    while ( fgets(word, 20, fd) != NULL ) {
+    while ( fgets(str_passwd, 20, fd) != NULL ) {
         // printf("%s\n", word);
         if ( ferror(fd) ) break;
 
-        current_hash = (unsigned char *) ec_malloc(MD5_DIGEST_LENGTH);
-        current_hash = md5_hash((unsigned char *) word);
+        /*
+         * 2. For each previously unused word W, first mark it as used and then carry out the following process.
+         * a) Apply the hash function H to the word W to produce a hash value H(W), which we refer to as the current hash.
+         * b) Apply the reduction function R to the current hash, which will give a different possible password
+         *    which should be marked as used and then hashed. The resulting hash value is recorded as the current hash.
+         * c) Repeat the previous step four times. You can deal with collisions if you like but are not required to.
+         * d) Store the original word W and the final current hash as an entry in your entry table.
+         * */
+        PasswordRecord current_hash;
 
-        Hash hash = { current_hash, USED };
+        strcpy(current_hash.str_passwd, str_passwd);
+        current_hash.hashed_digest = md5_hash((unsigned char *) str_passwd);
+        current_hash.used = USED;
+
+        RAINBOW_TABLE[i++] = current_hash;
 
         count++;
-        free(current_hash);
     }
 
     fclose(fd);
@@ -69,6 +82,17 @@ int main( int argc, const char* argv[] )
     printf("Passwords read: %d\n", count);
 
     return 0;
+}
+
+void make_rainbow_value()
+{
+
+}
+
+void reduction()
+{
+    // Apply the reduction function R to the current hash, which will give a different possible
+    // password which should be marked as used and then hashed.
 }
 
 // A hashing function to create MD5 Digest from a string passed in.
@@ -87,11 +111,6 @@ unsigned char *md5_hash(unsigned char * str)
     // printf("\n");
 
     return md5_digest;
-}
-
-void generate_rainbow(char * word)
-{
-
 }
 
 /* ########## HELPER FUNCS ########## */
