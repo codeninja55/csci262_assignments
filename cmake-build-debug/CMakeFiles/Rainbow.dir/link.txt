@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/Rainbow.dir/assignment01/Rainbow.c.o  -o ../assignment01/Rainbow 
