@@ -1,3 +1,3 @@
-/mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir
+/home/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir

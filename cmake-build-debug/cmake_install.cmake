@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments
+# Install script for directory: /home/codeninja/Dropbox/uow_csci262/csci262_assignments
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/codeninja/Dropbox/uow_csci262/csci262_assignments/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
