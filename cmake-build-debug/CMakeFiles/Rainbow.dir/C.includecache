@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/codeninja/Dropbox/uow_csci262/csci262_assignments/assignment01/Rainbow.c
+/home/codeninja/Github/csci262_assignments/assignment01/Rainbow.c
 stdio.h
 -
 string.h
@@ -16,7 +16,13 @@ stdlib.h
 time.h
 -
 md5.h
-/home/codeninja/Dropbox/uow_csci262/csci262_assignments/assignment01/md5.h
+/home/codeninja/Github/csci262_assignments/assignment01/md5.h
 
-/home/codeninja/Dropbox/uow_csci262/csci262_assignments/assignment01/md5.h
+/home/codeninja/Github/csci262_assignments/assignment01/md5.c
+string.h
+-
+md5.h
+/home/codeninja/Github/csci262_assignments/assignment01/md5.h
+
+/home/codeninja/Github/csci262_assignments/assignment01/md5.h
 
