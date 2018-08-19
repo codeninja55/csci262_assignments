@@ -5,7 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/home/codeninja/Github/csci262_assignments/assignment01/Rainbow.c" "/home/codeninja/Github/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir/assignment01/Rainbow.c.o"
-  "/home/codeninja/Github/csci262_assignments/assignment01/md5.c" "/home/codeninja/Github/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir/assignment01/md5.c.o"
+  "/home/codeninja/Github/csci262_assignments/assignment01/avltree.c" "/home/codeninja/Github/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir/assignment01/avltree.c.o"
+  "/home/codeninja/Github/csci262_assignments/assignment01/helper.c" "/home/codeninja/Github/csci262_assignments/cmake-build-debug/CMakeFiles/Rainbow.dir/assignment01/helper.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -13,6 +14,7 @@ set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "../"
   "../assignment01"
+  "/usr/include/openssl"
   )
 
 # Targets to which this target links.
