@@ -9,35 +9,32 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <memory.h>
 #include "avltree.h"
 #include "helper.h"
 
+int COUNTER = 0;
 
 // Recursively insert a node into the tree and then fix it's balance by rotations
 NODE* insert(NODE* node, char *key, PasswordRecord pr)
 {
-    if ( node != NULL ) {
-        // printf("Key: [ %02x ]", (unsigned int) key);
-        // printf("%d\n", strncmp((const char *) key, (const char *) node->key, 8));
-        // printf("%d\n", memcmp(key, node->key, 6));
-
-        // printf("Key: %s  ; Node Key: %s \n", key, node->key);
-    }
     if ( node == NULL ) {
         NODE *new_node = (NODE *) ec_malloc(sizeof(NODE));
         strcpy(new_node->key, key);
+        // new_node->key = key;
         new_node->password_record = pr;
         new_node->left = new_node->right = NULL;
         new_node->height = 0;
         return new_node;
-    } else if ( strcmp(key, node->key ) < 0 ) {
+    } else if ( strncmp(key, node->key, 32) < 0 ) {
         node->left = insert(node->left, key, pr);
-    } else if ( strcmp(key, node->key) > 0 ) {
+    } else if ( strncmp(key, node->key, 32) > 0 ) {
         node->right = insert(node->right, key, pr);
-    } else
-        return node;  // Equal keys not allowed
+    }
+    // else
+    //     return node;  // Equal keys not allowed
 
     node->height = 1 + max(height(node->left), height(node->right));
 
@@ -46,19 +43,19 @@ NODE* insert(NODE* node, char *key, PasswordRecord pr)
     // Checking the imbalance and balancing the BST.
     /* CASE 1 - left left case */
     // if ( balance > 1 && key < (node->left)->key )
-    if ( balance > 1 && strcmp(key, (node->left)->key) < 0 )
+    if ( balance > 1 && strncmp(key, (node->left)->key, 32) < 0 )
         return rotate_right(node);
 
     /* CASE 2 - right right case */
-    if ( balance < -1 && strcmp(key, (node->right)->key) > 0 )
+    if ( balance < -1 && strncmp(key, (node->right)->key, 32) > 0 )
         return rotate_left(node);
 
     /* CASE 3 - left right case */
-    if ( balance > 1 && strcmp(key, (node->left)->key) > 0 )
+    if ( balance > 1 && strncmp(key, (node->left)->key, 32) > 0 )
         return double_rotate_right(node);
 
     /* CASE 4 - right left case */
-    if ( balance < -1 && strcmp(key, (node->right)->key) < 0 )
+    if ( balance < -1 && strncmp(key, (node->right)->key, 32) < 0 )
         return double_rotate_left(node);
 
     return node;
@@ -101,14 +98,33 @@ NODE* double_rotate_left(NODE* n3)
     return rotate_left(n3);
 }
 
+void pre_order_sort(NODE *root)
+{
+    if ( root != NULL ) {
+        printf("Password (str): %s\n", root->password_record.str_passwd);
+        // printf("Key (hex): %s\n", root->key);
+        printf("Message digest (): ");
+        for ( int i = 0; i < 16; i++ )
+            printf("%02x", root->password_record.hashed_digest[i]);
+        printf("\n");
+        printf("TREE COUNT: %d\n\n", ++COUNTER);
+        pre_order_sort(root->left);
+        pre_order_sort(root->right);
+    }
+}
+
 // Traverse and sort the BST in-order
 void in_order_sort(NODE *root)
 {
     if ( root != NULL ) {
         in_order_sort(root->left);
-        // for ( int i = 0; i < 16; i++ ) printf("%02x ", (unsigned int) root->key[i]);
-        // printf("\n");
-        printf("%s\n", root->key);
+        printf("Password (str): %s\n", root->password_record.str_passwd);
+        // printf("Key (hex): %s\n", root->key);
+        printf("Message digest (): ");
+        for ( int i = 0; i < 16; i++ )
+            printf("%02x", root->password_record.hashed_digest[i]);
+        printf("\n");
+        printf("TREE COUNT: %d\n\n", ++COUNTER);
         in_order_sort(root->right);
     }
 }
@@ -119,10 +135,10 @@ NODE* search(NODE* ROOT, char *key)
     if ( ROOT == NULL )
         return NULL;
 
-    if ( strcmp(key, ROOT->key ) == 0 )
+    if ( strncmp(key, ROOT->key, 32) == 0 )
         return ROOT;
 
-    if ( strcmp(key, ROOT->key ) < 0 )
+    if ( strncmp(key, ROOT->key, 32 ) < 0 )
         return search(ROOT->left, key );
     else
         return search(ROOT->right, key);
@@ -151,7 +167,6 @@ int str_cmp(const char *str1, const char *str2)
 {
     while ( *str1 || *str2 ) {
         if ( *str1 != *str2 ) return *str1 - *str2;
-        printf("str1: %s ; str2: %s\n", str1, str2);
         ++str1;
         ++str2;
     }
