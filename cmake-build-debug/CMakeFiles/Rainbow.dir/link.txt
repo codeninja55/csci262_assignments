@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/Rainbow.dir/assignment01/Rainbow.c.o  -o ../assignment01/Rainbow 
+/usr/bin/cc  -lssl -lcrypto -lm -g   CMakeFiles/Rainbow.dir/assignment01/helper.c.o CMakeFiles/Rainbow.dir/assignment01/avltree.c.o CMakeFiles/Rainbow.dir/assignment01/Rainbow.c.o  -o ../assignment01/Rainbow -lcrypto -lm 
