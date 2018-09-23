@@ -1,0 +1,158 @@
+Delivered-To: andrew@neuraldev.io
+Received: by 2002:a0d:fc85:0:0:0:0:0 with SMTP id m127-v6csp4209206ywf;
+        Sat, 22 Sep 2018 22:07:33 -0700 (PDT)
+X-Google-Smtp-Source: ACcGV61kSKRs1ArZ7PNCDRd9t698GirPfQWOuMBEQiUUg/4YdVB+yAftO5cuAoMbz0vrw3lIQRLN
+X-Received: by 2002:a50:9232:: with SMTP id i47-v6mr7392980eda.78.1537679253294;
+        Sat, 22 Sep 2018 22:07:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1537679253; cv=none;
+        d=google.com; s=arc-20160816;
+        b=lASfIAqcmSpHZcZKWStUvH/XEH5aNjtgycDbshoxhQnLr4LWGimLbNck0xSL3yP+VI
+         DcQGArqTJW+tXVhY/aO+xem+aYF6ztirIGo/C+7Pm3bO1UCvn6BU2QACihXKSaP0COUu
+         HKfmNC6FiI+i5f3rkhtZlUa/sYq1ae/SHf9QVsfjlf6ofF9g60ztz1xuEDMqeVzrAAsZ
+         aWa02d3aAUS6KZjdfI4C9AGQsZnZxS8T/8FlO6wib0v0naLd7Z3JlpG/0npnxjyoch2f
+         14r1ZnanjuH8YBjQanAg71PZk1JuBSA9+AbnwYVVWycwM3cc7SxqJIl3/KcFpkF8rJO3
+         E+/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=message-id:to:subject:mime-version:from:date
+         :content-transfer-encoding:cc:dkim-signature;
+        bh=JPyVFOGg+yTLoAzmG29L9ULB1hAi1rohMkvoJMB4ID8=;
+        b=c5Bnv2nlrMMi8zvS7WDc29fVzZ5H7oTW2cecTfMzNa0j5yzRze6Nsbw5OdrSrokn+3
+         mYbFKf2QQ0VBj01TZqtvN8sNvdDnAeWSr8J/vf2DLQBsO4u+NTrjd+FoVIg4PISxVZQV
+         P1eXg9iwic46vW/RSRngGkKyWtj/bjpzd6UkSICBeInBRrUL+vbjKFF1b1SKyzB1Yf3x
+         rgI0mzx8Cl2IzYitf+xgBdbVZM7I/H4WVTnFG+CVdEkm5y2CkBC1OxntFcHdN7g17ppl
+         DZWs2phm+1imGaRQx6yvzBTKIt+k9tlQ9a74XjA8wFuA8PStYl0ENANdybpmheFs21iB
+         xrEw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@atlassian.com header.s=s1 header.b=hCHvy+cI;
+       spf=pass (google.com: domain of noreply@mail.notifications.atlassian.com designates 167.89.14.106 as permitted sender) smtp.mailfrom=noreply@mail.notifications.atlassian.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=atlassian.com
+Return-Path: <noreply@mail.notifications.atlassian.com>
+Received: from o25.mail.notifications.atlassian.com (o25.mail.notifications.atlassian.com. [167.89.14.106])
+        by mx.google.com with ESMTPS id q1-v6si1227072edn.6.2018.09.22.22.07.32
+        for <andrew@neuraldev.io>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Sat, 22 Sep 2018 22:07:33 -0700 (PDT)
+Received-SPF: pass (google.com: domain of noreply@mail.notifications.atlassian.com designates 167.89.14.106 as permitted sender) client-ip=167.89.14.106;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@atlassian.com header.s=s1 header.b=hCHvy+cI;
+       spf=pass (google.com: domain of noreply@mail.notifications.atlassian.com designates 167.89.14.106 as permitted sender) smtp.mailfrom=noreply@mail.notifications.atlassian.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=atlassian.com
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=atlassian.com; 
+	h=cc:content-transfer-encoding:content-type:from:mime-version:subject:to; 
+	s=s1; bh=bavrg+CKDh8lVqpin9ybyGiQtFw=; b=hCHvy+cI/oJf6lKNAXZffgM
+	lK2jjDlVo3ifxDunlCjk7Y4oYxxTZ07xrxV8iSp8aLjlTGHrfrj7HhMW3EXuQEvI
+	InsrVh/15nrSJo3ohrfHL23pptnS4jeOS8fe9XEU+973ni55OkSne6mzwCma+rU2
+	xgkFoUS9f9WY7wVYPt48=
+Received: by filter0435p1iad2.sendgrid.net with SMTP id filter0435p1iad2-10028-5BA71F93-6
+        2018-09-23 05:07:31.689316951 +0000 UTC m=+1407033.868026033
+Received: from MjMwNjk4Ng (ec2-52-8-84-222.us-west-1.compute.amazonaws.com [52.8.84.222])
+	by ismtpd0003p1sjc2.sendgrid.net (SG) with HTTP id AeebJ2KXRaaPCNVnRh3Kbg
+	Sun, 23 Sep 2018 05:07:31.603 +0000 (UTC)
+Cc: andrew@neuraldev.io
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 23 Sep 2018 05:07:31 +0000 (UTC)
+From: "Atlassian" <noreply@mail.notifications.atlassian.com>
+Mime-Version: 1.0
+Subject: Your subscription has changed
+To: andrew@neuraldev.io
+Message-ID: <AeebJ2KXRaaPCNVnRh3Kbg@ismtpd0003p1sjc2.sendgrid.net>
+X-SG-EID: frIfN26J56lykouHokKeyQZ6T6kV0esfrs5uOjsZDA8Y0nwJqHUcYEraS7pq7vpnvqgbW5J6B7yU4v
+ Oa4gZx/Pe11K778AbhS17/jsQDW9/sgUXBMEvXRswXwO2oIkNRQttSCRYwKbi/GKPZNm3+rtfv/wHR
+ 9a3DnFHtE3ohk+H0KpZN+sM1olNzQxwXvzIt1kCW5hIIj8ycxhiCsEAJqFcSA8R3sQKJjpm4Y5sdm3
+ ZUcv3dGZG8ucYliD+WWoFi
+X-SG-ID: gKwTZ5VXut2QiIcryHwOqwKOapovjCu4cF89RSTko7g=
+
+<!DOCTYPE html><div style=3D"background-color:#fff;color:#172b4d;font-famil=
+y:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Oxygen, U=
+buntu, Droid Sans, Helvetica Neue, sans-serif;font-size:14px;font-style:nor=
+mal;font-weight:400;line-height:1.42857142857143;letter-spacing:-.005em;tex=
+t-decoration-skip:ink"><table cellPadding=3D"0" cellSpacing=3D"0" style=3D"=
+width:100%;align:center" class=3D"main table_shrink"><tbody><tr><td><table =
+style=3D"width:520px;margin:auto;text-align:center" cellPadding=3D"0" cellS=
+pacing=3D"0" class=3D"table_shrink"><tbody><tr><td style=3D"vertical-align:=
+top;text-align:left" class=3D"message-body"><div><table style=3D"width:100%=
+;border:0;border-collapse:collapse" cellPadding=3D"0" cellSpacing=3D"0" cla=
+ss=3D"table_shrink"><tbody><tr><td style=3D"padding-top:30px;padding-bottom=
+:10px;vertical-align:top;text-align:center"><a href=3D"http://www.atlassian=
+.com"><img src=3D"http://cpfs-cdn.atlassian.com/assets/shared/id-summit/id-=
+summit-email_logo_360x80_NEW.png" height=3D"24" alt=3D"Atlassian" style=3D"=
+align:center;border:0"/></a></td></tr></tbody></table></div><p style=3D"mar=
+gin-top:16px"><h1 style=3D"font-size:2.07142857em;font-style:normal;font-we=
+ight:bolder;letter-spacing:-.01em;line-height:1.10344828;margin:auto;text-a=
+lign:center">Your subscription has changed</h1></p><p style=3D"text-align:c=
+enter"><img height=3D"190" src=3D"https://cpfs-cdn.atlassian.com/assets/sha=
+red/illustration-library/Collaborative-Workflow.png"/></p><p style=3D"margi=
+n-top:16px"><b>Hi Andrew,</b></p><div><p style=3D"margin-top:16px">You have=
+ been unsubscribed from the following product(s) for your site <a href=3D"h=
+ttps://neuraldev.atlassian.net" style=3D"border:none;background:transparent=
+;color:#0052cc;text-decoration:none">neuraldev.atlassian.net</a>:=C2=A0Conf=
+luence, JIRA Software.=C2=A0<span>The following product(s): Confluence, JIR=
+A Software will be permanently deleted and your data no longer available af=
+ter 22 Nov 2018.=C2=A0</span></p><p style=3D"margin-top:16px">Your Stride s=
+ubscription is unaffected as it is on the Free plan.</p></div><div><div><p =
+style=3D"margin-top:16px">This is because we were unable to process your pa=
+yment for=C2=A0<a href=3D"https://neuraldev.atlassian.net" style=3D"border:=
+none;background:transparent;color:#0052cc;text-decoration:none">neuraldev.a=
+tlassian.net</a>. Payments can sometimes be declined as a result of restric=
+tions imposed by your bank on international transactions. We recommend tryi=
+ng a different payment method or alternatively contacting your bank.</p><p =
+style=3D"margin-top:16px">If you would like to resubscribe to Confluence, J=
+IRA Software, please update your payment details and visit the Manage Subsc=
+riptions in the Billing section of your site.</p><p style=3D"margin-top:16p=
+x"><a href=3D"https://neuraldev.atlassian.net/admin/billing/paymentdetails/=
+update" style=3D"align-items:baseline;box-sizing:border-box;border-radius:3=
+px;border-width:0;display:inline-flex;font-style:normal;font-size:inherit;h=
+eight:2.28571429em;line-height:2.28571429em;margin:0;outline:none;padding:0=
+ 8px;text-align:center;transition:background .1s ease-out, box-shadow .15s =
+cubic-bezier(.47, .03, .49, 1.38);user-select:none;vertical-align:middle;wh=
+ite-space:nowrap;text-decoration:none;border:none;background:#0052cc;color:=
+#fff">Update Payment Details</a></p></div></div><p style=3D"margin-top:16px=
+">If you would like a copy of your data before it is deleted, or have any o=
+ther questions please <a href=3D"https://www.atlassian.com/contact" style=
+=3D"border:none;background:transparent;color:#0052cc;text-decoration:none">=
+contact us</a>.</p><hr style=3D"border:none;border-bottom:1px solid #444"/>=
+<p style=3D"margin-top:16px">Please <a href=3D"https://www.atlassian.com/co=
+ntact" style=3D"border:none;background:transparent;color:#0052cc;text-decor=
+ation:none">contact us</a> with any questions, we&#x27;re always happy to h=
+elp.</p><p style=3D"margin-top:16px">Cheers,<br/>The Atlassians</p><div sty=
+le=3D"color:#707070;font-size:13px;line-height:19px;text-align:center;margi=
+n-top:32px"><p style=3D"margin-top:16px"><a style=3D"text-decoration:none;c=
+olor:#707070" href=3D"https://www.atlassian.com/legal/privacy-policy?utm_so=
+urce=3D-email&amp;utm_medium=3Demail&amp;utm_campaign=3D">Privacy Policy</a=
+>=C2=A0=E2=80=A2=C2=A0<a style=3D"text-decoration:none;color:#707070" href=
+=3D"https://www.atlassian.com/company/contact?utm_source=3D-email&amp;utm_m=
+edium=3Demail&amp;utm_campaign=3D">Contact us</a>=C2=A0=E2=80=A2=C2=A0<a st=
+yle=3D"text-decoration:none;color:#707070" href=3D"https://blogs.atlassian.=
+com/?utm_source=3D-email&amp;utm_medium=3Demail&amp;utm_campaign=3D">Read o=
+ur Blog</a></p><p style=3D"margin-top:16px"><a style=3D"text-decoration:non=
+e;color:#707070" href=3D"https://www.facebook.com/Atlassian"><img src=3D"ht=
+tp://cpfs-cdn.atlassian.com/assets/shared/social-media/Facebookx2.png" alt=
+=3D"Facebook" align=3D"center" title=3D"Facebook" style=3D"line-height:0px;=
+outline:0;padding:0;border:0;height:25px;width:auto"/></a>=C2=A0=C2=A0=C2=
+=A0<a style=3D"text-decoration:none;color:#707070" href=3D"https://www.link=
+edin.com/company/atlassian"><img src=3D"http://cpfs-cdn.atlassian.com/asset=
+s/shared/social-media/LinkedInx2.png" alt=3D"LinkedIn" align=3D"center" tit=
+le=3D"LinkedIn" style=3D"line-height:0px;outline:0;padding:0;border:0;heigh=
+t:25px;width:auto"/></a>=C2=A0=C2=A0=C2=A0<a style=3D"text-decoration:none;=
+color:#707070" href=3D"https://twitter.com/Atlassian"><img src=3D"http://cp=
+fs-cdn.atlassian.com/assets/shared/social-media/Twitterx2.png" alt=3D"Twitt=
+er" align=3D"center" title=3D"Twitter" style=3D"line-height:0px;outline:0;p=
+adding:0;border:0;height:25px;width:auto"/></a></p><p style=3D"margin-top:1=
+6px">Copyright 2018 Atlassian Pty Ltd. All rights reserved. We are located =
+at <br/>341 George Street, Sydney, NSW, 2000, Australia</p><p style=3D"marg=
+in-top:16px"><a style=3D"text-decoration:none;color:#707070" href=3D"http:/=
+/www.atlassian.com?utm_source=3D-email&amp;utm_medium=3Demail&amp;utm_campa=
+ign=3D"><img src=3D"http://cpfs-cdn.atlassian.com/assets/shared/id-summit/i=
+d-summit-email_logo_360x80_NEW.png" height=3D"15px" alt=3D"Atlassian"/></a>=
+</p></div></td></tr></tbody></table></td></tr></tbody></table></div><img sr=
+c=3D"https://link.notifications.atlassian.com/wf/open?upn=3DO7ROD4svS-2BWtZ=
+VG4Rcp0Qg-2B3UaXazTKJCtHhdngpWNiBk7jpSRIpch8A8qZfT-2F5OE6w65-2BlczIi1qMWPQh=
+Og7n7QkaTo-2BnxSyfxRqYe5NfSm7wanrsOEK9zCFfHn2sZ-2BTScQmrYrSbP-2BI8MctsGu65S=
+CQ-2Bu3YOGbdBJCtYENDeW8J-2B-2FUIk0RK1XKp-2BVnaFZ-2Ftjf-2BPLi3uJ8ki10XyemCSt=
+NItttx90n3ssVilH5nj65SXAfmQCv-2Ff6KBpXX9EYz1" alt=3D"" width=3D"1" height=
+=3D"1" border=3D"0" style=3D"height:1px !important;width:1px !important;bor=
+der-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;m=
+argin-right:0 !important;margin-left:0 !important;padding-top:0 !important;=
+padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !impo=
+rtant;"/>
