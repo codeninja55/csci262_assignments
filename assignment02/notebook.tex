@@ -1,0 +1,1019 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{assignment02\_dbac496}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \textbf{Due:} 2018.09.24 \textbf{\textbar{} Author:} Dinh Che
+\textbf{\textbar{} Student ID:} 5721970 \textbf{\textbar{} Email:}
+dbac496@uowmail.edu.au
+
+    \hypertarget{question-1.}{%
+\subsubsection{Question 1.}\label{question-1.}}
+
+\begin{itemize}
+\tightlist
+\item
+  Expected number of hashes:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(h =\sim 2^{k-1}\)
+  \end{itemize}
+\item
+  Cost of completing \(P\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\sim m \cdot 2^{k-1}\)
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}} \PY{n}{matplotlib} \PY{n}{inline}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+        
+        
+        \PY{k}{def} \PY{n+nf}{cost}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cases} \PY{o}{=} \PY{n}{m} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{k} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cases}
+        
+        
+        \PY{n}{case\PYZus{}2} \PY{o}{=} \PY{p}{[}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Hashes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{44}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{p}{]}
+        
+        \PY{n}{df\PYZus{}2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{case\PYZus{}2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{p}{[}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{44}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{31}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+            \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{cost}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{17}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{p}{]}
+        
+        \PY{n}{df\PYZus{}1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}dict}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}2}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hashes vs. Cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Hashes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hashes vs. Cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} Hashes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{box}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2 Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{df\PYZus{}2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Case 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{question-2.}{%
+\subsubsection{Question 2.}\label{question-2.}}
+
+\begin{itemize}
+\tightlist
+\item
+  Original
+\end{itemize}
+
+\begin{verbatim}
+permit = CheckAccess()
+
+IF (permit == Access_Denied)
+    Print "Access Denied"
+ELSE 
+    Print "Access Granted"
+    Run Function()
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  "Default deny, not default allow!
+\end{itemize}
+
+\begin{verbatim}
+permit = CheckAccess()
+IF (permit == Access_Granted)
+    Print "Access Granted"
+    Run Function()
+ELSE
+    Print "Access Denied"
+\end{verbatim}
+
+    \hypertarget{question-3.}{%
+\subsubsection{Question 3.}\label{question-3.}}
+
+Consider that the incidence of viral attachments in email messages is 1
+in 800. Your malware checker will correctly identify a message as viral
+95\% of the time. Your malware checker will correctly identify a message
+non-viral 95\% of the time. Your malware checker has just flagged a
+message as being malware. What is the probability that the message is
+actually okay? Justify your answer using Bayes theorem
+
+\[
+\begin{align*}
+& P
+\end{align*}
+\]
+
+    \hypertarget{question-4.}{%
+\subsubsection{Question 4.}\label{question-4.}}
+
+Describe, in your own words, a specific instance of an insider placing
+malware within a system. You should describe the type of malware placed,
+the expected likely impact, and some details regarding the outcome. This
+is not meaning a hypothetical scenario you have made up, find an actual
+real world example.
+
+    \hypertarget{references}{%
+\paragraph{References:}\label{references}}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+K. Zetter, ``How Digital Detectives Deciphered Stuxnet, The Most
+Menacing Malware in History,'' \emph{wired.com,} Jul.~07, 2011.
+{[}Online{]} Available:
+https://www.wired.com/2011/07/how-digital-detectives-deciphered-stuxnet/
+{[}Accessed: Sep.~21, 2018{]}.
+
+\begin{itemize}
+\item
+  ``Months earlier, in June 2009, someone had silently unleashed a
+  sophisticated and destructive digital worm that had been slithering
+  its way through computers in Iran with just one aim - to sabotage the
+  country's uranium enrichment program and prevent President Mahmoud
+  Ahmadinejad from building a nuclear weapon.''
+\item
+  ``Ulasen's research team got hold of the virus infecting their
+  client's computer and realized it was using a''zero -day" exploit to
+  spread. Zero-days are the hacking world's most potent weapons: They
+  exploit vulnerabilities in software that are yet unknown to the
+  software maker or antivirus vendors."
+\item
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+Wikimedia Foundation Inc, ``Stuxnet,'' \emph{Wikipedia}, 2018.
+{[}Online{]}. Available: https://en.wikipedia.org/wiki/Stuxnet
+{[}Accessed: Sep.~21, 2018{]}.
+
+\begin{itemize}
+\item
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+J. Shearer, ``W32.Stuxnet Writeup,'' \emph{Symantec Enterprise,}
+Security Center, Sep.~26, 2017. {[}Online{]}. Available:
+https://www.symantec.com/security-center/writeup/2010-071400-3123-99
+{[}Accessed: Sep.~21, 2018{]}.
+
+\begin{itemize}
+\item
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+D. Kushner, ``The Real Story of Stuxnet,'' \emph{IEEE Spectrum,}
+Feb.~26, 2013. {[}Online{]}. Available:
+https://spectrum.ieee.org/telecom/security/the-real-story-of-stuxnet
+{[}Accessed: Sep.~21, 2018{]}.
+
+\begin{itemize}
+\item
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+R. Naraine, ``Stuxnet attackers used 4 Windows zero-day exploits,''
+\emph{zdnet.com}, Sep.~24, 2010. {[}Online{]}. Available:
+https://www.zdnet.com/article/stuxnet-attackers-used-4-windows-zero-day-exploits/
+{[}Accessed: Sep.~21, 2018{]}.
+
+\begin{itemize}
+\tightlist
+\item
+  ``\ldots{} four different zero-day security vulnerabilities to burrow
+  into -- and spread around -- Microsoft's Windows operating system.''
+\item
+  ``\ldots{} initially targeted the old MS08-067 vulnerability (used in
+  the Conficker attack), a new LNK (Windows Shortcut) flaw to launch
+  exploit code on vulnerable WIndows systems and a zero-day bug in the
+  Print Spooler Service that makes it possible for malicious code to be
+  passed to, and then executed on, a remote machine.''
+\item
+  ``\ldots{} worm also used signed digital certificates stolen from
+  RealTek and JMicron and also exploited security problems in the
+  Simatic WinCC SCADA systems.''
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+J. Fruhlinger, ``What is Stuxnet, who created it and how does it work?''
+\emph{csoonline.com}, Aug.~22, 2017. {[}Online{]}. Available:
+https://www.csoonline.com/article/3218104/malware/what-is-stuxnet-who-created-it-and-how-does-it-work.html
+{[}Accessed: Sep.~21, 2018{]}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Stux net was first identified by the infosec community in 2010, but
+  development on it probably began in 2005.''
+\item
+  ``Despite its unparalleled ability to spread and its widespread
+  infection rate, Stuxnet does little or no harm to computers not
+  involved in uranium enrichment. When it infects a computer, it checks
+  to see if that computer is connected to specific models of
+  programmable logic controllers (PLCs) manufactured by Siemens. PLCs
+  are how computers interact with and control industrial machinery like
+  uranium centrifuges.''
+\item
+  ``The worm then alters PLCs' programming, resulting in the centrifuges
+  being spun too quickly and for too long, damaging or destroying the
+  delicate equipment in the process.''
+\item
+  ``While this is happening, the PLCs tell the controller computer that
+  everything is working fine, making it difficult to detect or diagnose
+  what's going wrong until it's too late.''
+\end{itemize}
+
+\href{https://www.ted.com/talks/ralph_langner_cracking_stuxnet_a_21st_century_cyberweapon}{x}
+D. Sanger, ``Obama Order Sped Up Wave of Cyberattacks Against Iran,''
+\emph{nytimes.com}, Jun.~1, 2012. {[}Online{]}. Available:
+https://www.nytimes.com/2012/06/01/world/middleeast/obama-ordered-wave-of-cyberattacks-against-iran.html?pagewanted=1\&\_r=1\&hp
+{[}Accessed: Sep.~22, 2018{]}.
+
+\begin{itemize}
+\item
+\end{itemize}
+
+    \hypertarget{question-5.}{%
+\subsubsection{Question 5.}\label{question-5.}}
+
+In the context of phishing, list 8 points that can be used in checking
+the legitimacy of an email. Justify why each is appropriate as an
+indicator. Note that some points could relate to characteristics of
+legitimate messages, and others could be indicators of a phishing
+message.
+
+    In relation to detecting phishing attempts, the following are points to
+consider when checking the legitimacy of an email:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Anti-spam filtering software
+
+  The use of anti-spam filtering software at the desktop level or at the
+  gateway level (by ISPs and email service providers) is considered
+\item
+  Identifying receiving email address in email header
+\item
+  Check any domain and URL link sent in email body for spelling errors
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Additionally, check the web address of any embedded links
+  \end{itemize}
+\item
+  Type desired web address into browser instead of clicking on embedded
+  links
+\item
+  Confirm the apparent sending institution is a legitimate provider of
+  service
+\item
+  Check for any spelling or grammatical errors in the email body
+  content\\
+\item
+  Call the apparent sending institution to verify authenticity\\
+\item
+  Do not open any attachments that you are not expecting and especially
+  if it is an executable (.exe suffix)
+\item
+  Check the whether the website is using the HTTPS protocol and check
+  the SSL certificate is legitimate
+\end{enumerate}
+
+{[}x{]} G. Tally, R. Thomas, \& T. Van Vleck, ``Anti-Phishing: Best
+Practices for Institutions and Consumers,'' \emph{McAfee}, Sep.~2004.
+{[}Online{]}. Available:
+https://docs.apwg.org/sponsors\_technical\_papers/Anti-Phishing\_Best\_Practices\_for\_Institutions\_Consumer0904.pdf
+{[}Accessed: Sep, 23, 2018{]}.
+
+{[}x{]} W. Zamora, ``Something's phishy: How to detect phishing
+attempts,'' \emph{Malwarebytes Labs}, Jun.~26, 2017. {[}Online{]}.
+Available:
+https://blog.malwarebytes.com/101/2017/06/somethings-phishy-how-to-detect-phishing-attempts/
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}x{]} Anti-Phishing Working Group, ``How to Avoid Phishing Scams,''
+\emph{Anti-Phishing Working Group}. {[}Online{]}. Available:
+https://apwg.org/resources/overview/avoid-phishing-scams {[}Accessed:
+Sep.~23, 2018{]}
+
+    \hypertarget{question-6.}{%
+\subsubsection{Question 6.}\label{question-6.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{from} \PY{n+nn}{enum} \PY{k}{import} \PY{n}{Enum}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         
+         
+         \PY{k}{class} \PY{n+nc}{State}\PY{p}{(}\PY{n}{Enum}\PY{p}{)}\PY{p}{:}
+             \PY{n}{UN\PYZus{}INF} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{X\PYZus{}INF} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{W\PYZus{}INF} \PY{o}{=} \PY{l+m+mi}{2}
+         
+         
+         \PY{n}{time} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{n\PYZus{}C} \PY{o}{=} \PY{l+m+mi}{0}  \PY{c+c1}{\PYZsh{} number of computers}
+         \PY{n}{n\PYZus{}X} \PY{o}{=} \PY{l+m+mi}{0}  \PY{c+c1}{\PYZsh{} number of X infected computers}
+         
+         \PY{c+c1}{\PYZsh{} Get the number of computers}
+         \PY{n}{n\PYZus{}C} \PY{o}{=} \PY{l+m+mi}{10}
+         
+         \PY{n}{computers} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{State}\PY{o}{.}\PY{n}{UN\PYZus{}INF} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n\PYZus{}C} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{uninfected\PYZus{}sample} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{computers}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{n\PYZus{}C}\PY{p}{)}  \PY{c+c1}{\PYZsh{} set up a random sample with no duplicates}
+         
+         \PY{n}{choice} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{uninfected\PYZus{}sample}\PY{p}{)}  \PY{c+c1}{\PYZsh{} select one to be infected at the beginning}
+         \PY{n}{computers}\PY{p}{[}\PY{n}{uninfected\PYZus{}sample}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{State}\PY{o}{.}\PY{n}{X\PYZus{}INF}
+         
+         \PY{c+c1}{\PYZsh{} Set pandas display options to fit width}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}rows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{24.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{time} \PY{o}{=} \PY{n}{i}
+         
+             \PY{c+c1}{\PYZsh{} every hour the worm X spreads from each infected computer to one previously uninfected computer.}
+             \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{infected} \PY{o}{=} \PY{p}{[}\PY{n}{val} \PY{k}{for} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{val} \PY{o+ow}{in} \PY{n}{computers}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{n}{val} \PY{o}{==} \PY{n}{State}\PY{o}{.}\PY{n}{X\PYZus{}INF}\PY{p}{]}
+                 \PY{n}{n\PYZus{}X} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{infected}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{uninfected\PYZus{}sample} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{continue}
+                 \PY{k}{elif} \PY{n}{n\PYZus{}X} \PY{o}{\PYZlt{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{uninfected\PYZus{}sample}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}X}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{computers}\PY{p}{[}\PY{n}{uninfected\PYZus{}sample}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{State}\PY{o}{.}\PY{n}{X\PYZus{}INF}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{uninfected\PYZus{}sample}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{computers}\PY{p}{[}\PY{n}{uninfected\PYZus{}sample}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{State}\PY{o}{.}\PY{n}{X\PYZus{}INF}
+         
+                 \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{uninfected\PYZus{}sample}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} computers\PYZus{}df = \PYZob{}\PYZsq{}computer\PYZsq{}: [x for x in computers.keys()],}
+                 \PY{c+c1}{\PYZsh{}                 \PYZsq{}state\PYZsq{}: [y for y in computers.values()]\PYZcb{}}
+                 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{computers}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{State}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{]}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{time}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ ==\PYZgt{} [ X Infected:  }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}X}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ ] }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time: 0.0 ==> [ X Infected:  1 ] 
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <div>
+         <style scoped>
+             .dataframe tbody tr th:only-of-type \{
+                 vertical-align: middle;
+             \}
+         
+             .dataframe tbody tr th \{
+                 vertical-align: top;
+             \}
+         
+             .dataframe thead th \{
+                 text-align: right;
+             \}
+         </style>
+         <table border="1" class="dataframe">
+           <thead>
+             <tr style="text-align: right;">
+               <th></th>
+               <th>1</th>
+               <th>2</th>
+               <th>3</th>
+               <th>4</th>
+               <th>5</th>
+               <th>6</th>
+               <th>7</th>
+               <th>8</th>
+               <th>9</th>
+               <th>10</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th>State</th>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+             </tr>
+           </tbody>
+         </table>
+         </div>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time: 1.0 ==> [ X Infected:  2 ] 
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <div>
+         <style scoped>
+             .dataframe tbody tr th:only-of-type \{
+                 vertical-align: middle;
+             \}
+         
+             .dataframe tbody tr th \{
+                 vertical-align: top;
+             \}
+         
+             .dataframe thead th \{
+                 text-align: right;
+             \}
+         </style>
+         <table border="1" class="dataframe">
+           <thead>
+             <tr style="text-align: right;">
+               <th></th>
+               <th>1</th>
+               <th>2</th>
+               <th>3</th>
+               <th>4</th>
+               <th>5</th>
+               <th>6</th>
+               <th>7</th>
+               <th>8</th>
+               <th>9</th>
+               <th>10</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th>State</th>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+             </tr>
+           </tbody>
+         </table>
+         </div>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time: 2.0 ==> [ X Infected:  4 ] 
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <div>
+         <style scoped>
+             .dataframe tbody tr th:only-of-type \{
+                 vertical-align: middle;
+             \}
+         
+             .dataframe tbody tr th \{
+                 vertical-align: top;
+             \}
+         
+             .dataframe thead th \{
+                 text-align: right;
+             \}
+         </style>
+         <table border="1" class="dataframe">
+           <thead>
+             <tr style="text-align: right;">
+               <th></th>
+               <th>1</th>
+               <th>2</th>
+               <th>3</th>
+               <th>4</th>
+               <th>5</th>
+               <th>6</th>
+               <th>7</th>
+               <th>8</th>
+               <th>9</th>
+               <th>10</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th>State</th>
+               <td>State.X\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.UN\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+             </tr>
+           </tbody>
+         </table>
+         </div>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+Time: 3.0 ==> [ X Infected:  8 ] 
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <div>
+         <style scoped>
+             .dataframe tbody tr th:only-of-type \{
+                 vertical-align: middle;
+             \}
+         
+             .dataframe tbody tr th \{
+                 vertical-align: top;
+             \}
+         
+             .dataframe thead th \{
+                 text-align: right;
+             \}
+         </style>
+         <table border="1" class="dataframe">
+           <thead>
+             <tr style="text-align: right;">
+               <th></th>
+               <th>1</th>
+               <th>2</th>
+               <th>3</th>
+               <th>4</th>
+               <th>5</th>
+               <th>6</th>
+               <th>7</th>
+               <th>8</th>
+               <th>9</th>
+               <th>10</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <th>State</th>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+               <td>State.X\_INF</td>
+             </tr>
+           </tbody>
+         </table>
+         </div>
+\end{Verbatim}
+            
+    \hypertarget{question-7.}{%
+\subsubsection{Question 7.}\label{question-7.}}
+
+    \hypertarget{xml-bomb}{%
+\paragraph{XML Bomb}\label{xml-bomb}}
+
+A form of Denial-of-Service attack that impacts the availability of a
+website. XML, eXtensible Markup Language, is a markup language that was
+designed and is popular for storing and transferring structured data
+{[}1{]}. Data files can be checked by a parsing library before being
+processed. XML schemas and Document Type Definitions (DTDs) files are
+used to then validate and compare rules for the type of data that
+appears in the XML file. Inline DTDs can be abused when the parsing
+library is not configured properly, causing what is known as an XML bomb
+or Entity Expansion XML bomb {[}2{]}. A famous XML bomb example includes
+the ``Billions Laugh Effect.'' This type of attack can list entity
+definitions in an XML file that is heavily nested, leading to parsing
+that can lead to extremly large files. The large size of these parsed
+XML files can cause a server to crash.
+
+\hypertarget{bluesmack}{%
+\paragraph{BlueSmack}\label{bluesmack}}
+
+A form of Denial-of-Service attack that specifically targets
+Bluetooth-enabled devices and the Bluetooth protocol. It is a similar
+technique to the `Ping of Death' attack of Windows 95, where a l2ping
+data packet (roughly 600 bytes) is transmitted to a Bluetooth device
+bigger than the maximum packet size {[}3{]}, {[}4{]}. This causes the
+device to become unusable, and can also affect the device by draining
+its battery {[}4{]}. The l2ping packet is part of the standard
+distribution of the BlueZ utility package that ships with Linux {[}3{]}.
+
+\hypertarget{mydoom}{%
+\paragraph{Mydoom}\label{mydoom}}
+
+Mydoom (aka W32.MyDoom@mm) is a variant of computer worm that was spread
+via email which affected Microsoft Windows systems discovered in 2004.
+It infected systems by copying itself to P2P KaZaA client shared
+directories and its payload contained a backdoor Remote Access component
+on TCP port 3127 {[}5{]}. From here, the worm was able to extract email
+addresses from the system and then use SMTP methods to send itself as an
+attachment from the host email server {[}5{]}. The original variant of
+Mydoom is the fastest growing spam email worm known so far and has also
+been shown to avoid sending itself to certain domain addresses such as
+Rutgers, MIT, Stanford, UC Berkeley, Microsoft and Symantec {[}6{]}.
+Other variants of the worm were later designed to use infected hosts as
+zombies in a Distributed Denial-of-Service attack directed at the SCO
+Group and Microsoft {[}6{]}.
+
+\hypertarget{torpig}{%
+\paragraph{Torpig}\label{torpig}}
+
+\hypertarget{references}{%
+\paragraph{References:}\label{references}}
+
+{[}1{]} w3schools, ``Introduction to XML,'' \emph{w3schools.com}.
+{[}Online{]}. Available: https://www.w3schools.com/xml/xml\_whatis.asp
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}2{]} D. Jovanoski, ``XML vulnerabilities,'' May 6, 2013.
+{[}Online{]}. Available:
+https://resources.infosecinstitute.com/xml-vulnerabilities/ {[}Accessed:
+Sep.~23, 2018{]}.
+
+{[}3{]} trinite.suff, ``BlueSmack,'' \emph{tifinite.org}. {[}Online{]}
+Available: https://trifinite.org/trifinite\_stuff\_bluesmack.html
+{[}Accessed: Sep.~23, 2018{]}
+
+{[}4{]} S.P. Oriyano, \emph{Kali Linux Wireless Penetration Testing
+Cookbook}. Birmingham: Packt Publishing, 2017.
+
+{[}5{]} McAfee, ``Virus Profile: W32/Mydoom@MM,'' \emph{McAfee},
+Jan.~02, 2004. {[}Online{]}. Available:
+https://home.mcafee.com/virusinfo/virusprofile.aspx?key=100983
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}6{]} Newsweek Staff, ``More Doom?'' \emph{Newsweek}, Feb.~2, 2004.
+{[}Online{]}. Available: https://www.newsweek.com/more-doom-131157
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}7{]} B. Stone-Gross, M. Cova, B. Gilbert, R. Kemmerer, C. Kruegel,
+and G. Vigna, "Analysis of a Botnet Takeover,' \emph{IEEE Security \&
+Privacy}, vol.~9, no. 1, Jan.-Feb, pp.~64-72, 2010. Available: IEEE
+Xplore Digital Library, https://ieeexplore.ieee.org/document/5560627/.
+{[}Accessed September 23, 2018{]}.
+
+{[}8{]} Carnegie Mellon University, ``Torpig,'' \emph{web.archive.org},
+May 19, 2015. {[}Online{]}. Available:
+https://web.archive.org/web/20150519174934/http://www.cmu.edu/iso/aware/be-aware/torpig.html
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}9{]} R. Naraine, ``Botnet hijack: Inside the Torpig malware
+operation,'' \emph{zdnet.com}, May 4, 2009. {[}Online{]} Available:
+https://www.zdnet.com/article/botnet-hijack-inside-the-torpig-malware-operation/
+{[}Accessed: Sep.~23, 2018{]}.
+
+    \hypertarget{question-8.}{%
+\subsubsection{Question 8.}\label{question-8.}}
+
+    A Browser Helper Object (BHO) is a plugin that is used in Microsoft's
+Internet Explorer (IE) that added additional functionality, such as a
+toolbar, to the browsers Document Object Model (DOM) {[}2{]}. The
+objects are commonly DLL, DAT, or EXE files that are installed
+mistakenly by users or often as part of bundled software.
+
+It is for its designed and intended purpose that BHOs were used
+maliciously in an attack commonly called Browser Hijack Objects, which
+is a form of adware. This attack affects the integrity and availability
+of the system {[}1{]}. In this malicious infection, the plugin that is
+installed is often used to provide advertisements in a toolbar that can
+provide financial incentives for the attacker when clicked on. Through
+the use of BHOs, the attacker can automate the the clicks for financial
+gain every time a victim uses their browser.
+
+\hypertarget{references}{%
+\paragraph{References:}\label{references}}
+
+{[}1{]} W. Stallings, \emph{Computer Security: Principles and Practice,
+Global Edition, 4th Edition}, New York, NY: Pearson, 2018.
+{[}VitalSource Bookshelf version{]}. Available:
+https://www.vitalsource.com/en-uk/products/computer-security-principles-and-practice-global-william-stallings-v9781292220635.
+{[}Accessed: Sep.~23, 2018{]}.
+
+{[}2{]} Malwarebytes Labs, ``Browser Hijack Objects (BHOs),''
+\emph{Malwarebytes Labs}, Jun.~9, 2016. {[}Online{]}. Available:
+https://blog.malwarebytes.com/threats/browser-hijack-objects-bhos/
+{[}Accessed: Sep.~23, 2018{]}.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
