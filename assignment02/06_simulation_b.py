@@ -60,7 +60,7 @@ for i in np.arange(0, 24.5, 0.5):
 
         if w_infected_sample is None:
             continue
-        elif n_w < n_comps:
+        elif n_w <= n_x and n_w < n_comps:
             for l in range(n_w * 2):
                 computers[x_infected_sample.pop()] = State.W_INF
 
@@ -69,9 +69,14 @@ for i in np.arange(0, 24.5, 0.5):
         computers[w_choice] = State.W_INF
         n_w = 1
 
+    n_w = len(x_infected_sample)
+    n_x = len(w_infected_sample)
+
     computers_df = {'COMPUTER': [x for x in computers.keys()],
                     'STATE': [("X" if y == State.X_INF else "W" if y == State.W_INF else "U")
                               for y in computers.values()]}
     df = pd.DataFrame.from_dict(computers_df, orient='index')
     print("Time: " + str(time) + " ==> [ X Infected:  " + str(n_x) + " ] [ W Infected: " + str(n_w) + " ]")
     print(df.to_string(header=False) + "\n")
+
+# if '__name__' == '__main__':
