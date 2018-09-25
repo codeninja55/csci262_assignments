@@ -1,3 +1,0 @@
-/home/codeninja/Github/csci262_assignments/cmake-build-default/CMakeFiles/rebuild_cache.dir
-/home/codeninja/Github/csci262_assignments/cmake-build-default/CMakeFiles/Rainbow.dir
-/home/codeninja/Github/csci262_assignments/cmake-build-default/CMakeFiles/edit_cache.dir
