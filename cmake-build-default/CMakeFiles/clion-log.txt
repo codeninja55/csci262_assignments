@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" /home/codeninja/Github/csci262_assignments
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/codeninja/Github/csci262_assignments/cmake-build-default
